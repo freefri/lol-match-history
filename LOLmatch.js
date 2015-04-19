@@ -506,22 +506,21 @@ MatchHistory.download = function (limit, callback) {
 };
 
 
-
+// Autoload section
+var MatchHistory = window.MatchHistory || {};
 (function (url, id, cb) {
-    if (MatchHistory.download) {return;}c
-    var d = document,
-        s = 'script',
+    if (MatchHistory.download) {return;}
+    var d = document, s = 'script',
         js = d.createElement(s),
         fjs = d.getElementsByTagName(s)[0];
-    js.id = id;
-    js.src = '//' + url;
+    js.id = id;js.src = '//' + url;
     if (!d.getElementById(id)) {
         if (cb) {js.addEventListener('load', function (e) {cb(null, e);}, false);}
         fjs.parentNode.insertBefore(js, fjs);
-    } else {(cb){cb();}}
-})('LOLmatch.js', 'lolmatch', function () {
+    } else {if(cb){cb();}}
+})('raw.githubusercontent.com/freefri/lol-match-history/master/LOLmatch.js', 'lolmatch', function () {
 	MatchHistory.authorization = "{AUTH_CODE}"
 	MatchHistory.region = "{REGION}";
-	MatchHistory.sumID = {SUMMONER_ID};
+	MatchHistory.sumID = "{SUMMONER_ID}";
     MatchHistory.download();
-})
+});
