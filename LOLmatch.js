@@ -440,8 +440,9 @@ MatchHistory.printTable = function (order) {
 };
 
 MatchHistory.download = function (limit, callback) {
-	var region = MatchHistory.region.toUpperCase();
-	if (!MatchHistory.sumID || MatchHistory.sumID[1] === '{') {
+	var region = MatchHistory.region.toUpperCase(),
+		id = MatchHistory.sumID;
+	if (!id || id[1] === '{') {
 		console.error('Input the summoner ID i.e. MatchHistory.sumID = "22266688"');
 		return;
 	}
