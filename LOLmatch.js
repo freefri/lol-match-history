@@ -442,16 +442,16 @@ MatchHistory.printTable = function (order) {
 MatchHistory.download = function (limit, callback) {
 	var region = MatchHistory.region.toUpperCase(),
 		id = MatchHistory.sumID;
-	if (!id || id[1] === '{') {
-		console.error('Input the summoner ID i.e. MatchHistory.sumID = "22266688"');
+	if (!id || id[0] === '{') {
+		console.error('Input the summoner ID. Write in console: MatchHistory.sumID = "22266688"');
 		return;
 	}
-	if (!region || region[1] === '{') {
-		console.error('Input the region i.e. MatchHistory.region = "EUW"');
+	if (!region || region[0] === '{') {
+		console.error('Input the region. Write in console: MatchHistory.region = "EUW"');
 		return;
 	}
-	if (!MatchHistory.authorization || MatchHistory.authorization[1] === '{') {
-		console.error('Input the auth code i.e. MatchHistory.authorization = "the code"');
+	if (!MatchHistory.authorization || MatchHistory.authorization[0] === '{') {
+		console.error('Input the auth code. Write in console: MatchHistory.authorization = "the code"');
 		return;
 	}
 	if (!limit) {
