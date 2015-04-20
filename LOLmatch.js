@@ -458,7 +458,7 @@ MatchHistory.download = function (limit, callback) {
 		limit = 25;
 	}
     var endpoint = 'https://acs.leagueoflegends.com/v1/stats/player_history/' +
-    	region + '/';
+    	region + '1/';
     var BIGGEST_QUERY = 20;
     var endParams2 = '&queue=0&queue=2&queue=4&queue=6&queue=7&queue=8&queue=9&queue=14&queue=16&queue=17&queue=25&queue=31&queue=32&queue=33&queue=41&queue=42&queue=52&queue=61&queue=65&queue=70&queue=73&queue=76&queue=78&queue=83&queue=91&queue=92&queue=93&queue=96&queue=98&queue=300';
     var endParams = '';
@@ -482,9 +482,13 @@ MatchHistory.download = function (limit, callback) {
     function _sendGet(url) {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var myArr = JSON.parse(xmlhttp.responseText);
-                filterAllStats(myArr.games.games);
+            if (xmlhttp.readyState == 4) {
+                if (xmlhttp.status == 200) {
+                    var myArr = JSON.parse(xmlhttp.responseText);
+                    filterAllStats(myArr.games.games);
+                } else {
+                    console.error(xmlhttp.statusText, xmlhttp.response);
+                }
             }
         };
         xmlhttp.open("GET",url,true);
