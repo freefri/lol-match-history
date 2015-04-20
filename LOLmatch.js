@@ -385,7 +385,6 @@ MatchHistory.sort = function (array, field) {
         if (a[field] > b[field]) {
             return direction;
         }
-        // a must be equal to b
         return 0;
     })
 };
@@ -524,8 +523,8 @@ var MatchHistory = window.MatchHistory || {};
         fjs.parentNode.insertBefore(js, fjs);
     } else {if(cb){cb();}}
 })('raw.githubusercontent.com/freefri/lol-match-history/master/LOLmatch.js', 'lolmatch', function () {
-	MatchHistory.authorization = "{AUTH_CODE}"
-	MatchHistory.region = "{REGION}";
-	MatchHistory.sumID = "{SUMMONER_ID}";
+    MatchHistory.authorization = "{AUTH_CODE}";
+    MatchHistory.region = "{REGION}";
+    MatchHistory.sumID = "{SUMMONER_ID}";
     MatchHistory.download();
 });
