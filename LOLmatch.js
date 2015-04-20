@@ -514,7 +514,7 @@ MatchHistory.download = function (limit, callback) {
 // Autoload section
 var MatchHistory = window.MatchHistory || {};
 (function (url, id, cb) {
-    if (MatchHistory.download) {return;}
+    if (MatchHistory.download) {if(cb){cb();}return;}
     var d = document, s = 'script',
         js = d.createElement(s),
         fjs = d.getElementsByTagName(s)[0];
