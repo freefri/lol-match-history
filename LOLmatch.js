@@ -454,7 +454,7 @@ MatchHistory.download = function (limit, callback) {
 		return;
 	}
 	if (!limit) {
-		limit = 25;
+		limit = 2000;
 	}
     var endpoint = 'https://acs.leagueoflegends.com/v1/stats/player_history/' +
     	region + '1/';
