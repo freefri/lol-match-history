@@ -9,8 +9,8 @@ This script is not using the official Riot API and it should run from leagueofle
 1. Open the developer tool by pressing F12 or doing right click and *Inspect element*
 1. In the developer tool go to network and in the bottom press XHR in order to filter the network trafic
 1. In the Match History site, click in view my match history (if you already see your matches, just reload the page - F5)
-1. In the developer tool you should be able to see how new requests appear. One of them should be something similar to `GET auth?betIndex=0&...`. Click on it and copy the *Authorization* string from *request headers*, you will need to include this code as *{AUTH_CODE}*
-1. Get your summoner id from the url of the Match history `http://matchhistory.euw.leagueoflegends.com/en/#match-history/EUW1/{your SUMMONER_ID}`. You will need to replace *{SUMMONER_ID}* with this ID.
+1. In the developer tool you should be able to see how new requests appear. One of them should be something similar to `GET auth?betIndex=0&...`. Click on it and copy the *Authorization* string from *request headers*, you will need to include this code as *{AUTH_CODE}* (The code will be something like `Vapor eyJk...0ifQ`)
+1. Get your numeric summoner id from the url of the Match history `http://matchhistory.euw.leagueoflegends.com/en/#match-history/EUW1/{your SUMMONER_ID}`. You will need to replace *{SUMMONER_ID}* with this ID.
 1. In the developer tool go to *Console* and **paste the following code** (**Remember to replace** *{AUTH_CODE}*, *{SUMMONER_ID}* and *{REGION}* - the double quotation marks *"* are needed):
 
 ```javascript
@@ -25,7 +25,7 @@ var MatchHistory = window.MatchHistory || {};
         if (cb) {js.addEventListener('load', function (e) {cb(null, e);}, false);}
         fjs.parentNode.insertBefore(js, fjs);
     } else {if(cb){cb();}}
-})('raw.githubusercontent.com/freefri/lol-match-history/master/LOLmatch.js', 'lolmatch', function () {
+})('rawgit.com/freefri/lol-match-history/master/LOLmatch.js', 'lolmatch', function () {
     MatchHistory.authorization = "{AUTH_CODE}";
     MatchHistory.region = "{REGION}";
     MatchHistory.sumID = "{SUMMONER_ID}";
