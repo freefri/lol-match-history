@@ -365,8 +365,8 @@ MatchHistory.finished = function () {
         MatchHistory.fullResult.callback(MatchHistory.resByChamp);
     }
 
-    MatchHistory.printTable();
     console.log('MatchHistory.resByChamp', MatchHistory.resByChamp);
+    MatchHistory.printTable();
 };
 MatchHistory.sort = function (array, field) {
     var direction = 1;
@@ -392,16 +392,16 @@ MatchHistory.printTable = function (order) {
     if (!order) {
         order = '-win';
     }
-    var table = (function () {
-        document.getElementsByTagName('body').item(0).remove();
-        var head = document.getElementsByTagName('head').item(0);
-        head.parentNode.insertBefore(document.createElement('body'), head);
-        var body = document.getElementsByTagName('body').item(0);
+    var table = (function (d) {
+        d.getElementsByTagName('body').item(0).remove();
+        var head = d.getElementsByTagName('head').item(0);
+        head.parentNode.insertBefore(d.createElement('body'), head);
+        var body = d.getElementsByTagName('body').item(0);
         body.innerHTML = "<table id='table' style='width:100%; background-color:white'></table>";
-        var table = document.getElementById('table');
+        var table = d.getElementById('table');
         head.innerHTML = "<title>LOL stats</title><style>tr.active{outline: 2px solid #000;} .sortable, .clickable { cursor: pointer;} .sortable:hover, .clickable:hover { text-decoration: underline; color: #0000EE;} .bg1 {background-color:#ff0000;} .bg2{background-color:#ff7700;} .bg3{background-color:#ffcc00;} .bg4{background-color:#ffff00;} .bg5{background-color:#aaff00;} .bg6{background-color:#55aa00;} .bg7{background-color:#00aa00;} </style>";
         return table
-    })();
+    })(window.document);
     
     var row,
         inTable = "",
@@ -457,7 +457,7 @@ MatchHistory.download = function (limit, callback) {
 		limit = 2000;
 	}
     var endpoint = 'https://acs.leagueoflegends.com/v1/stats/player_history/' +
-    	region + '1/';
+    	region + '/';
     var BIGGEST_QUERY = 20;
     var endParams2 = '&queue=0&queue=2&queue=4&queue=6&queue=7&queue=8&queue=9&queue=14&queue=16&queue=17&queue=25&queue=31&queue=32&queue=33&queue=41&queue=42&queue=52&queue=61&queue=65&queue=70&queue=73&queue=76&queue=78&queue=83&queue=91&queue=92&queue=93&queue=96&queue=98&queue=300';
     var endParams = '';
@@ -479,7 +479,7 @@ MatchHistory.download = function (limit, callback) {
     }
 
     function _sendGet(url) {
-        var xmlhttp = new XMLHttpRequest();
+        var xmlhttp = new window.XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4) {
                 if (xmlhttp.status == 200) {
