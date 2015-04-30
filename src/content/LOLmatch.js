@@ -402,7 +402,7 @@ MatchHistory.printTable = function (order) {
         head.innerHTML = "<title>LOL stats</title><style>tr.active{outline: 2px solid #000;} .sortable, .clickable { cursor: pointer;} .sortable:hover, .clickable:hover { text-decoration: underline; color: #0000EE;} .bg1 {background-color:#ff0000;} .bg2{background-color:#ff7700;} .bg3{background-color:#ffcc00;} .bg4{background-color:#ffff00;} .bg5{background-color:#aaff00;} .bg6{background-color:#55aa00;} .bg7{background-color:#00aa00;} </style>";
         return table
     })(window.document);
-    
+
     var row,
         inTable = "",
         isHeaderPrinted = false,
@@ -418,46 +418,45 @@ MatchHistory.printTable = function (order) {
     });
     table.innerHTML = inTable;
 
-    (function () {
-        var list = document.getElementsByClassName('rowHead');
+    (function (d) {
+        var list = d.getElementsByClassName('rowHead');
         for (var i = 0; i < list.length; i++) {
-            list[i].addEventListener('click', function (e) {
+            list[i].onclick = function (e) {
                 e.target.parentElement.className = (e.target.parentElement.className)
                     ? '' : 'active';
-            });
+            }
         }
-    })();
+    })(window.document);
 
-    (function () {
-        var list = document.getElementsByClassName('sortable');
+    (function (d) {
+        var list = d.getElementsByClassName('sortable');
         for (var i = 0; i < list.length; i++) {
-            list[i].addEventListener('click', function (e) {
+            list[i].onclick = function (e) {
                 MatchHistory.printTable('-' + e.target.innerHTML);
-            });
+            };
         }
-    })();
+    })(window.document);
 };
 
 MatchHistory.download = function (limit, callback) {
-	var region = MatchHistory.region.toUpperCase(),
-		id = MatchHistory.sumID;
-	if (!id || id[0] === '{') {
-		console.error('Input the summoner ID. Write in console: MatchHistory.sumID = "22266688"');
-		return;
-	}
-	if (!region || region[0] === '{') {
-		console.error('Input the region. Write in console: MatchHistory.region = "EUW"');
-		return;
-	}
-	if (!MatchHistory.authorization || MatchHistory.authorization[0] === '{') {
-		console.error('Input the auth code. Write in console: MatchHistory.authorization = "the code"');
-		return;
-	}
-	if (!limit) {
-		limit = 2000;
-	}
-    var endpoint = 'https://acs.leagueoflegends.com/v1/stats/player_history/' +
-    	region + '/';
+    var region = MatchHistory.region.toUpperCase(),
+        id = MatchHistory.sumID;
+    if (!id || id[0] === '{') {
+        console.error('Input the summoner ID. Write in console: MatchHistory.sumID = "22266688"');
+        return;
+    }
+    if (!region || region[0] === '{') {
+        console.error('Input the region. Write in console: MatchHistory.region = "EUW"');
+        return;
+    }
+    if (!MatchHistory.authorization || MatchHistory.authorization[0] === '{') {
+        console.error('Input the auth code. Write in console: MatchHistory.authorization = "the code"');
+        return;
+    }
+    if (!limit) {
+        limit = 2000;
+    }
+    var endpoint = 'https://acs.leagueoflegends.com/v1/stats/player_history/' + region + '/';
     var BIGGEST_QUERY = 20;
     var endParams2 = '&queue=0&queue=2&queue=4&queue=6&queue=7&queue=8&queue=9&queue=14&queue=16&queue=17&queue=25&queue=31&queue=32&queue=33&queue=41&queue=42&queue=52&queue=61&queue=65&queue=70&queue=73&queue=76&queue=78&queue=83&queue=91&queue=92&queue=93&queue=96&queue=98&queue=300';
     var endParams = '';
